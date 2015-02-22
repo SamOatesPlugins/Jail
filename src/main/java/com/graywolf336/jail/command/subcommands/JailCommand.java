@@ -145,6 +145,14 @@ public class JailCommand implements Command {
                 c = jm.getJail(jailName).getCell(params.getCell());
             }
         }
+        else {
+            // Havn't specified a cell, so grab the first free one
+            c = j.getFirstEmptyCell();
+            if (c == null) {
+                sender.sendMessage(Lang.NOEMPTYCELLS.get(jailName));
+                return true;
+            }
+        }
 
         //If they want just any open cell, then let's find the first empty one
         if(params.isAnyCell()) {
